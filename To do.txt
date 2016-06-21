@@ -1,0 +1,4 @@
+
+-   Prefix ALL methods with their appropriate exposure literal
+        public/private/protected method_name(arguments:types):return_type {}
+        
