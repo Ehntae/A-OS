@@ -16,7 +16,7 @@ class EntityHandler {
     private static _entities:BaseEntity[] = [];
 
 
-	constructor() {
+	public constructor() {
 		if (EntityHandler._initialised == true)
 			throw new Error("Cannot instansiate more than one instance of a singleton!");
             
@@ -24,7 +24,7 @@ class EntityHandler {
 }
 	
 		
-	update() {
+	public update():void {
 		for (let i = 0; i < EntityHandler._entities.length; i++) {
 			let entity = EntityHandler._entities[i];
 			entity.update();	
@@ -32,17 +32,17 @@ class EntityHandler {
 	}
 	
 	
-	static getEntities():BaseEntity[] {
+	public static getEntities():BaseEntity[] {
 		return EntityHandler._entities;
 	}
 	
 
-    static registerEntity(entity:BaseEntity):void {
+	public static registerEntity(entity:BaseEntity):void {
 		EntityHandler._entities.push(entity);
 	}
 	
 	
-	static removeEntity(entityId:number):void {
+	public static removeEntity(entityId:number):void {
 		
 		//  Check the entities array for the entity with the desired ID
 		//      and splice the array to remove the index with that ID.
