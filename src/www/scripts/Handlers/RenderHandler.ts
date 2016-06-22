@@ -55,8 +55,8 @@ class RenderHandler {
 		let context = this._canvas.getContext("2d");
 		this._graphics = new Graphics(context);
 		
-		this._canvas.width  = window.innerWidth - 48;
-		this._canvas.height = window.innerHeight - 16;
+		this._canvas.width  = this._resolutionWidth;
+		this._canvas.height = this._resolutionHeight;
 		
 	}
 	
@@ -69,8 +69,12 @@ class RenderHandler {
 	public update():void {
 		
 		// Update the canvas resolution
-		this._canvas.width  = window.innerWidth  - 48;
-		this._canvas.height = window.innerHeight - 16;
+		this._resolutionWidth = window.innerWidth  - 48;
+		this._resolutionHeight = window.innerHeight - 16;
+
+		//Apply resolution to canvas height and width
+		this._canvas.width = this._resolutionWidth;
+		this._canvas.height = this._resolutionHeight;
 		
 		// Clear canvas and blit new coloured background
 		this._graphics.setColor(76, 144, 228);

@@ -60,3 +60,5 @@ have the entity handler give entities with transform, and renderer components to
 thus removing the coupling where components must know their parent entities.
 
 familiarize yourself with the project (and formatting) i have somme bad news for thursday - saturday.
+
+apply conversation with h1zi dev to the ecs framework.
