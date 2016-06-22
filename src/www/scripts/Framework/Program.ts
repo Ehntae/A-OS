@@ -3,7 +3,9 @@ import InputHandler from "../Handlers/InputHandler";
 import SocketHandler from "../Handlers/SocketHandler";
 import RenderHandler from "../Handlers/RenderHandler";
 import EntityHandler from "../Handlers/EntityHandler";
+import ViewportHandler from "../Handlers/ViewportHandler";
 
+import Camera from "../Entities/Camera";
 import Player from "../Entities/Player";
 
 import {vector2d, Vector2d} from "./utility";
@@ -17,6 +19,7 @@ class Program {
     public inputHandler:InputHandler;
     public renderHandler:RenderHandler;
     public entityHandler:EntityHandler;
+    public viewportHandler:ViewportHandler;
     
     constructor() {
         // Handle multiple instansiation
@@ -28,10 +31,11 @@ class Program {
     
     
     public setupHandlers():void {
-        this.entityHandler = new EntityHandler();
-        this.renderHandler = new RenderHandler();
-        this.inputHandler  = new InputHandler(this.renderHandler.getCanvas());
-        this.socketHandler = new SocketHandler();
+        this.viewportHandler = new ViewportHandler();
+        this.entityHandler   = new EntityHandler();
+        this.renderHandler   = new RenderHandler();
+        this.inputHandler    = new InputHandler(this.renderHandler.getCanvas());
+        this.socketHandler   = new SocketHandler();
     }
     
     // Initialising code
@@ -39,7 +43,9 @@ class Program {
         
         this.setupHandlers();
         
-        let player = new Player(-1);
+        let player:Player = new Player(-1);
+        let camera:Camera = new Camera(player);
+        
         player.transform.setScale(vector2d(16, 48));
         //player.renderer.setTexture("");
         
@@ -70,7 +76,8 @@ class Program {
         
 		this.inputHandler.update();
         this.entityHandler.update(); // this needs dt
-		this.renderHandler.update();
+		this.viewportHandler.update();
+        this.renderHandler.update();
         //this.socketHandler.update();
         
     }
