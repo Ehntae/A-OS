@@ -34,6 +34,7 @@ class Renderer implements IComponent {
 		RenderHandler.registerRenderer(this);
 	}
 	
+	// handlers-> entities ->components
 	
 	update():void {}
 	

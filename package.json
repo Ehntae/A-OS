@@ -9,5 +9,8 @@
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6",
     "socket.io": "^1.4.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }
