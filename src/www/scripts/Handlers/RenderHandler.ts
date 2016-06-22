@@ -55,8 +55,8 @@ class RenderHandler {
 		let context = this._canvas.getContext("2d");
 		this._graphics = new Graphics(context);
 		
-		this._canvas.width  = window.innerWidth - 48;
-		this._canvas.height = window.innerHeight - 16;
+		this._canvas.width  = this._resolutionWidth;
+		this._canvas.height = this._resolutionHeight;
 		
 	}
 	
@@ -69,8 +69,12 @@ class RenderHandler {
 	public update():void {
 		
 		// Update the canvas resolution
-		this._canvas.width  = window.innerWidth  - 48;
-		this._canvas.height = window.innerHeight - 16;
+		this._resolutionWidth = window.innerWidth  - 48;
+		this._resolutionHeight = window.innerHeight - 16;
+
+		//Apply resolution to canvas height and width
+		this._canvas.width = this._resolutionWidth;
+		this._canvas.height = this._resolutionHeight;
 		
 		// Clear canvas and blit new coloured background
 		this._graphics.setColor(76, 144, 228);
@@ -89,15 +93,7 @@ class RenderHandler {
 			let pos = parentEntity.transform.getPosition();
 			let scale = parentEntity.transform.getScale();
 			//-------------//
-			
-			//console.log(parentEntity.getId());
-			
-			if (parentEntity.getId() == 2) {
-				this._graphics.setColor(0, 0, 0);
-				this._graphics.setFont("Arial", 8);
-				this._graphics.text(32, 16, "Angle: " + parentEntity.transform.getFacingAngle());
-			}
-			
+
 			// Rotation
 			let ctx:CanvasRenderingContext2D = this._graphics.getContext();
 			ctx.save();
@@ -105,7 +101,7 @@ class RenderHandler {
 			// Rotate canvas at the center of the renderComponent
 			ctx.translate(pos.x + (scale.x / 2), pos.y + (scale.y / 2));
 			ctx.rotate((parentEntity.transform.getFacingAngle() + 90)* (Math.PI / 180));
-			
+
 			this._graphics.setColor(150, 70, 0);
 			this._graphics.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
 			

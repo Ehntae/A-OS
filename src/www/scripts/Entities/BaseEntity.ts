@@ -25,7 +25,7 @@ abstract class BaseEntity {
     
     abstract update():void;
     
-    getId():number {
+   	public getId():number {
         return this._id;
     }
 }

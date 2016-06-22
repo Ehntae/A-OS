@@ -19,14 +19,14 @@ class Ship extends BaseEntity {
 	public uniqueId:number;
 	public renderer:Renderer;
 	
-	constructor(uniqueId:number) {
+	public constructor(uniqueId:number) {
 		
 		super();
 		
 		// Setup entity's components
 		this.renderer = new Renderer(this);
 		this.transform = new Transform(this, vector2d(0, 0), vector2d(8, 8));
-		this.inputController = new InputController();
+		//this.inputController = new InputController();
 		
 		// The uniqueID issued by the server; used to identify clients serverside
 		this.uniqueId = uniqueId;
@@ -34,13 +34,13 @@ class Ship extends BaseEntity {
 	}
 	
 	
-	update():void {
+	public update():void {
 		this.transform.update();
 		//this.renderer.update(); // Renderer components are taken care of by the RenderHandler
 	}
 	
 	// Get uniqueId
-	getUniqueId() {
+	public getUniqueId() {
 		return this.uniqueId;
 	}
 	

@@ -66,8 +66,8 @@ class InputHandler {
         let player = entities[1];
         let cursor = entities[0];
         
-        let cursorX = ((this._cursorPos != undefined) ? this._cursorPos.x : 0);
-        let cursorY = ((this._cursorPos != undefined) ? this._cursorPos.y : 0);
+        let cursorX = ((this._cursorPos == undefined) ? 0 : this._cursorPos.x);
+        let cursorY = ((this._cursorPos == undefined) ? 0 : this._cursorPos.y);
         cursor.transform.setPosition(vector2d(cursorX, cursorY));
         
         
@@ -93,7 +93,7 @@ class InputHandler {
             
             transform.setPosition(vector2d(pos.x + dpos.x * 2, pos.y + dpos.y * 2));
         }
-        
+          
             
         if (this._keyStates[this._keycodes.s] == true) {
             let pos:Vector2d = transform.getPosition();

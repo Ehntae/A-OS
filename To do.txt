@@ -1,44 +1,64 @@
 <| Organized |>
 
 
--   Absolute coding style:
+[K]	Absolute coding style:
 	-	Prefix ALL methods with their appropriate exposure literal
 	-	public/private/protected method_name(arguments:types):return_type {}
 	
 	
--	Input receiving / controlling in a modular multi instance way:
+[A]	Input receiving / controlling in a modular multi instance way:
 	-	Super class InputReceiver has two subclasses, MouseReceiver and KeyboardReceiver.
 	-	Class InputController is an abstract class by its abstract update():void method.
 	-	Any entity that requires input, from the UI (User Interface) to the player's character in-game
 		will take an InputController component and override its update method (and maybe several fields? =>
 		potentially have entities simply use a subclass of inputController, made for them. This is less modular,
 		however, but will be the most consistent... hmmm
-			
+	-	Ship.inputController.keyDown(InputController.KEYCODES.W, function() { ship.moveForward()}
 
--	Upgrade project to Natty's new JSPM/SystemJS boilerplate
+		
 
-
--	Use absolute paths somehow in place of import "../../../../../../module";
-
-
--	Clean up every file to maintain consistent style
+[A]	Upgrade project to Natty's new JSPM/SystemJS boilerplate
 
 
--	In [Framework/utility.ts] create a util folder with helper modules inside, such as Vector2d
+[A]	Use absolute paths somehow in place of import "../../../../../../module";
 
 
--	Create semi-large update iteration backups stored on dropbox (zipped)
+[K]	Clean up every file to maintain consistent style
+
+
+[K]	In [Framework/utility.ts] create a Util folder with helper modules inside, such as Vector2d
+
+
+[*]	Create semi-large update iteration backups stored on dropbox (zipped)
 	-	Copy and revert main project folder to V0.1.0
 	
 	
--	MUST find and use any license files from any external modules!
+[A]	MUST find and use any license files from any external modules!
 	-	JQuery		|	Plan to use
 	-	Socket.io	|	Using client and server socket.io TODO:INCLUDE
 	-	Node.js		|	Using TODO:INCLUDE
 	-	Typescript	|	Using but doubt this needs a license TODO:INCLUDE/FINDOUT
 	
 
+[K] Organize the unorganized below
 
-<| unorganized |>
+
+[A] Text document with strict coding style rules 
+
+
+
+<| unorganized / ideas |>
 
 make some kind of logging module with global enable/disable whether debug mode is on or not
+
+Program the camera entity/viewport
+include a target entity or focus point
+
+make ship entity
+
+have the entity handler give entities with transform, and renderer components to the renderHandler:
+thus removing the coupling where components must know their parent entities.
+
+familiarize yourself with the project (and formatting) i have somme bad news for thursday - saturday.
+
+apply conversation with h1zi dev to the ecs framework.
