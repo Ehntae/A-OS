@@ -25,7 +25,7 @@ app.get("/*", function (req:express.Request, res:express.Response) {
 	let requestedFile:any = req.params[0];
 	
 	if (DEBUG_ENABLED == true)
-		console.log("[" + __dirname + "] Express serve file: " + requestedFile);
+		console.log("Express serve file: " + requestedFile);
 	
 	res.sendFile(__dirname + "/www/" + requestedFile);
 });
