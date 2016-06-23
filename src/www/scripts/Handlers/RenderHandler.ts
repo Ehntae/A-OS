@@ -1,8 +1,10 @@
 
-import Renderer from "../Components/Renderer";
 import BaseEntity from "../Entities/BaseEntity";
 
+import Renderer from "../Components/Renderer";
+
 import Graphics from "../Framework/Graphics";
+import {vector2d, Vector2d} from "../Framework/utility"
 
 /*  Name:   RenderHandler
 	Type:   Handler
@@ -30,8 +32,8 @@ class RenderHandler {
 	
 	// Resolution
 	private _resolutionType:RESOLUTION_TYPE;
-	private _resolutionWidth:number;
-	private _resolutionHeight:number;
+	private static _resolutionWidth:number;
+	private static _resolutionHeight:number;
 
 	// Framerate
 	private _frameRate:number;
@@ -55,26 +57,21 @@ class RenderHandler {
 		let context = this._canvas.getContext("2d");
 		this._graphics = new Graphics(context);
 		
-		this._canvas.width  = this._resolutionWidth;
-		this._canvas.height = this._resolutionHeight;
+		this._canvas.width  = RenderHandler._resolutionWidth;
+		this._canvas.height = RenderHandler._resolutionHeight;
 		
 	}
-	
-	
-	//private _resolutionChanged():boolean { ... idk todo: fix or remove this idk
-	//	return 
-	//}
 	
 	
 	public update():void {
 		
 		// Update the canvas resolution
-		this._resolutionWidth = window.innerWidth  - 48;
-		this._resolutionHeight = window.innerHeight - 16;
+		RenderHandler._resolutionWidth = window.innerWidth  - 48;
+		RenderHandler._resolutionHeight = window.innerHeight - 16;
 
 		//Apply resolution to canvas height and width
-		this._canvas.width = this._resolutionWidth;
-		this._canvas.height = this._resolutionHeight;
+		this._canvas.width = RenderHandler._resolutionWidth;
+		this._canvas.height = RenderHandler._resolutionHeight;
 		
 		// Clear canvas and blit new coloured background
 		this._graphics.setColor(76, 144, 228);
@@ -115,6 +112,11 @@ class RenderHandler {
 		return this._canvas;
 	}
 	
+
+	public static getResolution():Vector2d {
+		return vector2d(RenderHandler._resolutionWidth, RenderHandler._resolutionHeight);
+	}	
+
 	
 	public static registerRenderer(renderer:Renderer):void {
 		RenderHandler._renderComponents.push(renderer);
@@ -128,7 +130,6 @@ class RenderHandler {
 			if (RenderHandler._renderComponents[i].getId() == rendererId)
 				RenderHandler._renderComponents.splice(i, 1);
 	}
-	
 	
 }
 
