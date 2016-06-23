@@ -9,12 +9,13 @@ let io = SocketIO.listen(server);
 
 
 // Serve starting page
+app.use("/", express.static(__dirname + '/www'));
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + "/www/index.html");
 });
 
 // Serve any requested page
-app.use("/", express.static(__dirname + '/www')); //'/'
+//app.use("/", express.static(__dirname + '/www')); //'/'
 
 
 /*
@@ -63,6 +64,6 @@ io.on('connection', function(socket:UserSocket) {
 
 
 server.listen(8080, function() {
-	console.log("Server started: listening on port 8000");
+	console.log("Server started: listening on port 8080");
 });
 

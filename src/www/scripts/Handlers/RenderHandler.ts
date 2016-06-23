@@ -79,7 +79,6 @@ class RenderHandler {
 		
 		//TODO: Create FPS counter and draw it here
 		
-		let cursor:BaseEntity = RenderHandler._renderComponents[0].getParentEntity();
 		
 		// Gather renderable data from all entities that own a renderer component
 		for (let i = 0; i < RenderHandler._renderComponents.length; i++) {
@@ -100,7 +99,11 @@ class RenderHandler {
 			ctx.rotate((parentEntity.transform.getFacingAngle() + 90)* (Math.PI / 180));
 
 			this._graphics.setColor(150, 70, 0);
-			this._graphics.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
+			this._graphics.texture(
+				renderer.getTexture(), 
+				-scale.x / 2, -scale.y / 2,
+				scale.x, scale.y
+			);
 			
 			ctx.restore();
 		}

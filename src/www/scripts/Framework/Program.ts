@@ -47,7 +47,7 @@ class Program {
         let camera:Camera = new Camera(player);
         
         player.transform.setScale(vector2d(16, 48));
-        //player.renderer.setTexture("");
+        player.renderer.setTexture("../../resources/player.png");
         
     }
     
