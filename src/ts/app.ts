@@ -41,6 +41,16 @@ let io = SocketIO.listen(server);
 
 /*
 // Serve starting page
+<<<<<<< HEAD
+app.use("/", express.static(__dirname + '/www'));
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + "/www/index.html");
+});
+
+// Serve any requested page
+//app.use("/", express.static(__dirname + '/www')); //'/'
+
+=======
 express.get('/', function(req, res) {
 	res.sendFile(__dirname + "/www/index.html");
 });
@@ -57,6 +67,7 @@ server.get("/*", function(req, res) {
 	res.sendFile(__dirname + "/" + requestedFile);
 });
 */
+>>>>>>> refs/remotes/Aeomi/dev
 
 /*
 	Client sends their position to Server
@@ -105,7 +116,13 @@ io.on('connection', function(socket:UserSocket) {
 
 
 
+<<<<<<< HEAD
+server.listen(8080, function() {
+	console.log("Server started: listening on port 8080");
+});
+=======
 //server.listen(PORT_NUMBER, function() {
 //	console.log("Server started: listening on port " + PORT_NUMBER);
 //});
+>>>>>>> refs/remotes/Aeomi/dev
 
