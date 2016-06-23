@@ -22,10 +22,17 @@ class ViewportHandler {
          if (ViewportHandler._initialised == true)
             throw new Error("Cannot instansiate more than one instance of a singleton!");
             
+<<<<<<< HEAD
+            //let resolution:Vector2d = 
+
+            //camera.setResolution();
+            camera.update();
+=======
         
         ViewportHandler._initialised = true;
     }
 
+>>>>>>> origin/dev
 
     public update():void {
         for(let i = 0 ; i < ViewportHandler._cameraEntities.length; i++) {
