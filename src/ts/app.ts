@@ -2,26 +2,69 @@ import * as express from "express";
 import * as http from "http";
 import * as SocketIO from "socket.io";
 
-var app = express();
-var server:http.Server = http.createServer(app);
+// Set up NodeJS / Express / SocketIO server environment
+// Consider this the entry point to a future program singleton?
+
+// Configuration
+const PORT_NUMBER:number = process.env.PORT || 8080;
+const DEBUG_ENABLED:boolean = true;
+
+
+let app = express();
+let server:http.Server = http.createServer(app);
+
+
+// Set up Middleware
+app.get("/", function(req, res) {
+	res.sendFile(__dirname + "/www/index.html");
+});
+
+
+app.get("/*", function (req:express.Request, res:express.Response) {
+		
+	let requestedFile:any = req.params[0];
+	
+	if (DEBUG_ENABLED == true)
+		console.log("[" + __dirname + "] Express serve file: " + requestedFile);
+	
+	res.sendFile(__dirname + "/www/" + requestedFile);
+});
+
+// Set up server listening
+server.listen(PORT_NUMBER, function() {
+	console.log("Server started: listening on port " + PORT_NUMBER);
+});
 
 let io = SocketIO.listen(server);
 
 
+
+/*
 // Serve starting page
-app.get('/', function(req, res) {
+express.get('/', function(req, res) {
 	res.sendFile(__dirname + "/www/index.html");
 });
 
-// Serve any requested page
-app.use("/", express.static(__dirname + '/www')); //'/'
-
+// Serve any requested file other than the default index.html
+//app.use("/", express.static(__dirname + '/www'));
+server.get("/*", function(req, res) {
+	
+	let requestedFile:any = req.params[0];
+	
+	if (DEBUG_ENABLED == true)
+		console.log("Express serve file: " + requestedFile);
+	
+	res.sendFile(__dirname + "/" + requestedFile);
+});
+*/
 
 /*
 	Client sends their position to Server
 	Server sends client array every time it receives a new position
 	Eventually: Copy clients array and reduce; culling anyone outside of the players viewport (max range)
 */
+
+
 
 
 import ClientHandler from "./Handlers/ClientHandler";
@@ -62,7 +105,7 @@ io.on('connection', function(socket:UserSocket) {
 
 
 
-server.listen(8080, function() {
-	console.log("Server started: listening on port 8000");
-});
+//server.listen(PORT_NUMBER, function() {
+//	console.log("Server started: listening on port " + PORT_NUMBER);
+//});
 

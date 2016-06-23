@@ -24,9 +24,9 @@ class ViewportHandler {
         for(let i = 0 ; i < this._cameraEntities.length; i++) {
             let camera:Camera = this._cameraEntities[i];
             
-            let resolution:Vector2d = 
+            //let resolution:Vector2d = 
 
-            camera.setResolution();
+            //camera.setResolution();
             camera.update();
 
 
