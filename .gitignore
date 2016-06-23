@@ -50,3 +50,9 @@ dist/**/*.js
 dist/**/*.css
 dist/**/*.map
 dist/node_modules
+
+# ide files
+.vscode
+
+# image cache files
+thumbs.db
