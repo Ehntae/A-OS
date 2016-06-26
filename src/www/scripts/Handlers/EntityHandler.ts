@@ -1,6 +1,8 @@
 
 import BaseEntity from "../Entities/BaseEntity";
 
+import {vector2d, Vector2d} from "../Framework/utility";
+
 /*  Name:   EntityHandler
 	Type:   Handler
 	Auth:   Aeomi
@@ -28,6 +30,7 @@ class EntityHandler {
 		for (let i = 0; i < EntityHandler._entities.length; i++) {
 			let entity = EntityHandler._entities[i];
 			entity.update();	
+			EntityHandler.setScaleToTexture(entity); //remove when you change to new ecs
 		}
 	}
 	
@@ -51,6 +54,13 @@ class EntityHandler {
 				EntityHandler._entities.splice(i, 1);
 	}
 	
+	
+	public static setScaleToTexture(entity:any) {
+		if (entity.renderer !== undefined) {
+			let texture:HTMLImageElement = entity.renderer.getTexture();
+			entity.transform.setScale(vector2d(texture.width, texture.height));
+		}	
+	}
     
 }
 

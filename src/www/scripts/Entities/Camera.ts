@@ -29,7 +29,9 @@ class Camera extends BaseEntity {
 
         let targetPos:Vector2d = targetEntity.transform.getPosition();
         
-        this._transform = new Transform(this, targetPos, vector2d(0, 0));
+        this._transform = new Transform(this, targetPos);
+        this._transform.setScale(vector2d(0, 0));
+        
         ViewportHandler.registerCamera(this);
     } 
     

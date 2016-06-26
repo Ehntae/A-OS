@@ -46,17 +46,20 @@ class Program {
         let player:Player = new Player(-1);
         let camera:Camera = new Camera(player);
         
-        player.transform.setScale(vector2d(16, 48));
-        player.renderer.setTexture("../../resources/player.png");
+        //player.transform.setScale(vector2d(32, 32));
+        player.renderer.setTexture("../../resources/ship.png");
         
     }
     
     
     public run():void {
-        let tickrate:number = 1000 / 30; //TODO: make a config
+        let tickrate:number = 1000 / 60; //TODO: make a config
         
+        //TODO: Improve this / make modular
         let instance:any = this;
-        let cb = (function() { instance.update() }); //TODO: Improve this / make modular
+        let cb = (function() {
+            instance.update()
+        }); 
         
         setInterval(cb, tickrate);
     }

@@ -15,22 +15,23 @@ let server:http.Server = http.createServer(app);
 
 
 // Set up Middleware
-app.get("/", function(req, res) {
+app.get("/", function(req:express.Request, res:express.Response) {
 	res.sendFile(__dirname + "/www/index.html");
 });
 
 
 app.get("/*", function (req:express.Request, res:express.Response) {
-		
+
 	let requestedFile:any = req.params[0];
-	
+
 	if (DEBUG_ENABLED == true)
 		console.log("Express serve file: " + requestedFile);
-	
+
 	res.sendFile(__dirname + "/www/" + requestedFile);
 });
 
-// Set up server listening
+
+// Set up server listening on port
 server.listen(PORT_NUMBER, function() {
 	console.log("Server started: listening on port " + PORT_NUMBER);
 });
@@ -38,72 +39,35 @@ server.listen(PORT_NUMBER, function() {
 let io = SocketIO.listen(server);
 
 
-
-/*
-// Serve starting page
-<<<<<<< HEAD
-app.use("/", express.static(__dirname + '/www'));
-app.get('/', function(req, res) {
-	res.sendFile(__dirname + "/www/index.html");
-});
-
-// Serve any requested page
-//app.use("/", express.static(__dirname + '/www')); //'/'
-
-=======
-express.get('/', function(req, res) {
-	res.sendFile(__dirname + "/www/index.html");
-});
-
-// Serve any requested file other than the default index.html
-//app.use("/", express.static(__dirname + '/www'));
-server.get("/*", function(req, res) {
-	
-	let requestedFile:any = req.params[0];
-	
-	if (DEBUG_ENABLED == true)
-		console.log("Express serve file: " + requestedFile);
-	
-	res.sendFile(__dirname + "/" + requestedFile);
-});
-*/
->>>>>>> refs/remotes/Aeomi/dev
-
-/*
-	Client sends their position to Server
-	Server sends client array every time it receives a new position
-	Eventually: Copy clients array and reduce; culling anyone outside of the players viewport (max range)
-*/
-
-
+//TODO: Make a Program class in the Framework
 
 
 import ClientHandler from "./Handlers/ClientHandler";
-let clientHandler:ClientHandler = new ClientHandler(); 
+let clientHandler:ClientHandler = new ClientHandler();
 
 import Player from "./Entities/Player";
 import UserSocket from "./Framework/Interfaces/IUserSocket"
 
 
 io.on('connection', function(socket:UserSocket) {
-	
-	
+
+
 	// Tell server of a new user
 	socket.data = {};
 	socket.data.ipv4 = socket.handshake.address;    			// Get IPv4 address of the player for reference
 	console.log("User connected (" + socket.data.ipv4 + ")");
-	
-	
+
+
 	// Define the serverside "player" inside of their socket (to keep track of them)
 	let uniqueId:number = 1 + Math.floor(Math.random() * 9);
 	socket.data.player = new Player(uniqueId);
-	
-	
+
+
 	// Register the socket's player to the Handler
 	clientHandler.registerPlayer(socket.data.player);
-	
-	
-	
+
+
+
 	// Manage disconnect event
 	socket.on("disconnect", function() {
 		console.log("User disconnected (" + socket.data.ipv4 + ")");
@@ -112,17 +76,3 @@ io.on('connection', function(socket:UserSocket) {
 
 
 });
-
-
-
-
-<<<<<<< HEAD
-server.listen(8080, function() {
-	console.log("Server started: listening on port 8080");
-});
-=======
-//server.listen(PORT_NUMBER, function() {
-//	console.log("Server started: listening on port " + PORT_NUMBER);
-//});
->>>>>>> refs/remotes/Aeomi/dev
-

@@ -31,6 +31,8 @@ class Renderer implements IComponent {
 		// Assign an identification number according to the total created
 		this._id = ++Renderer.total;
 		
+		this._texture = new Image();
+		
 		RenderHandler.registerRenderer(this);
 	}
 	
@@ -40,7 +42,6 @@ class Renderer implements IComponent {
 	
 	// Load and internally cache a texture for rendering
 	public setTexture(path:string) {
-		this._texture = new Image();
 		this._texture.src = path;
 	}
 	

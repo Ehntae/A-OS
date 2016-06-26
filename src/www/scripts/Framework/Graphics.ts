@@ -56,7 +56,11 @@ class Graphics {
     }
 
 
-    public texture(texture:HTMLImageElement, x:number, y:number, w:number, h:number):void {
+    public texture(texture:HTMLImageElement, x:number, y:number) {
+        this.getContext().drawImage(texture, x, y);
+    }
+
+    public textureScaled(texture:HTMLImageElement, x:number, y:number, w:number, h:number):void {
         this.getContext().drawImage(texture, x, y, w, h);
     }
 

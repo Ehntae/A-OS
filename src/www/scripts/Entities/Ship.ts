@@ -25,7 +25,8 @@ class Ship extends BaseEntity {
 		
 		// Setup entity's components
 		this.renderer = new Renderer(this);
-		this.transform = new Transform(this, vector2d(0, 0), vector2d(8, 8));
+		this.transform = new Transform(this, vector2d(0, 0));
+		this.transform.setScale(vector2d(16, 16));
 		//this.inputController = new InputController();
 		
 		// The uniqueID issued by the server; used to identify clients serverside

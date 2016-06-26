@@ -26,13 +26,11 @@ class Transform implements IComponent {
     private _scale:Vector2d;
     
     // Must be created with a pre-determined positiion and scale
-    constructor(parentEntity:BaseEntity, position:Vector2d, scale:Vector2d) {
+    constructor(parentEntity:BaseEntity, position:Vector2d) {
         
         this._parentEntity = parentEntity;
         
         this._facingAngle = 0;
-        
-        this._scale = scale
         
         this._position = position;
         this._velocity = vector2d(0, 0);
